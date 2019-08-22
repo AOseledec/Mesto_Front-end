@@ -1,0 +1,9 @@
+.user-info__edit-button {
+  margin-top: 15px;
+  width: 38px !important;
+  height: 18px !important;
+  font-size: 7px !important;
+
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+}
