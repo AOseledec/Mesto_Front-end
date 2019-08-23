@@ -1,3 +1,5 @@
+import {indexApi as api} from './index.js'
+
 export class Card {
 
     constructor(title, url, idCard) {

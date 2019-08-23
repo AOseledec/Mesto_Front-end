@@ -1,3 +1,8 @@
+import {userInfoName} from './index.js'
+import {userInfoJob} from './index.js'
+import {userAvatar} from './index.js'
+import {cardList} from './index.js'
+
 export class Api {
     constructor(options) {
       // тело конструктора

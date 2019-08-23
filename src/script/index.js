@@ -1,7 +1,11 @@
 import "../pages/index.css";
+import "../images/logo.svg"
+import "../images/close.svg";
+
 import {CardList} from './Cardlist.js';
 import {Popup} from './Popup.js';
 import {Api} from './Api.js';
+
 
 /* Функции */
 
@@ -151,18 +155,17 @@ const urlMe               =  urlUsers + '/me';
 const urlCards            = '/cards';
 
 const api = new Api({
-  baseUrl: 'http://95.216.175.5/cohort1',
+  baseUrl: 'https://praktikum.tk/cohort1',
   headers: {
     authorization: myToken,
     'Content-Type': 'application/json'
   }
 });
 
-const cardList = new CardList( document.querySelector('.places-list'), /*[],*/ document.getElementById('img'));
+export const cardList = new CardList( document.querySelector('.places-list'), /*[],*/ document.getElementById('img'));
 
 const buttonUserInfo      = document.getElementById('editInfoButton');
 const buttonAddNewCard    = document.getElementById('addNewCard');
-const userAvatar          = document.querySelector('.user-info__photo');
 
 const popupAddNewCard     = new Popup(document.getElementById('card'), buttonAddNewCard);
 const popupEditInfo       = new Popup(document.getElementById('edit'), buttonUserInfo);
@@ -176,9 +179,9 @@ const buttonSubmitNewCard = formAddNewCard.elements.button;
 const buttonSubmitEditInfo= formEditInfo.elements.button;
 const buttonSubmitAvatar  = formAvatar.elements.button;
 
-const userInfoName        = document.querySelector('.user-info__name');
-const userInfoJob         = document.querySelector('.user-info__job');
-const userPhoto           = document.querySelector('.user-info__photo');
+export const userInfoName        = document.querySelector('.user-info__name');
+export const userInfoJob         = document.querySelector('.user-info__job');
+export const userAvatar          = document.querySelector('.user-info__photo');
 
 
 api.getInitialCards();
@@ -213,3 +216,5 @@ formEditInfo.elements.inputSecond.addEventListener('input', handleValidate);
 formAddNewCard.elements.inputSecond.addEventListener('input', handleValidate);
 formEditInfo.elements.inputFirst.addEventListener('input', handleValidate);
 formAvatar.elements.inputFirst.addEventListener('input', handleValidate);
+
+export {api as indexApi};

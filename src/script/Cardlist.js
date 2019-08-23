@@ -1,4 +1,6 @@
 import {Card} from './Card.js';
+import {Popup} from './Popup.js';
+import {indexApi as api} from './index.js'
 export class CardList {
     constructor(container, /*listCards,*/ popup) {
       this.container  = container;
