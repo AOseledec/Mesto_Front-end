@@ -20,7 +20,7 @@ export class Api {
           })
       .then(res => {
           if(res.ok) {
-              return res.json();
+            return Promise.resolve(res.json())
           }
           return Promise.reject(`Ошибка: ${res.status}`);
       })
@@ -29,24 +29,12 @@ export class Api {
   
     // загружаем с сервера начальный набор карточек
     getInitialCards() {
-      this.sendRequest('/cards','get')
-      // .then(res => res.filter(item => item.owner._id == this.user._id)) // Удалить строку для отображения всех карточек
-      .then(res => {
-        res.forEach(item => {
-          cardList.addCard(item.name, item.link, item.owner._id);
-        });
-      })
-      .catch(err => console.log(err));
+      return this.sendRequest('/cards','get');
     }
   
     // получаем информацию о пользователе
     getUserInfo() {
-      this.sendRequest('/users/me', 'get').then(res => {
-        this.user = res;
-        userInfoName.textContent          = res.name;
-        userInfoJob.textContent           = res.about;
-        userAvatar.style.backgroundImage  = `url(${res.avatar})`;
-      }).catch(err => console.log(err));
+      return this.sendRequest('/users/me', 'get');
     }
   
     // добавляем карточку

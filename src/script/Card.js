@@ -30,7 +30,7 @@ export class Card {
       cardButtonDelete.classList.add('place-card__delete-icon');
       cardDescriptionContainer.classList.add('place-card__description');
       cardTitleElement.classList.add('place-card__name');
-      cardTitleElement.textContent = title;
+      cardTitleElement.textContent = this.title;
       cardButtonLike.classList.add('place-card__like-icon');
   
       if(idCard === api.user._id){

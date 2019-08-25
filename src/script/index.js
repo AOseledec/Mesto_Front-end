@@ -1,17 +1,18 @@
-import "../pages/index.css";
+import "../pages/index.css"
 import "../images/logo.svg"
-import "../images/close.svg";
+import "../images/close.svg"
 
-import {CardList} from './Cardlist.js';
-import {Popup} from './Popup.js';
-import {Api} from './Api.js';
+import {api} from './Backend.js'
+import {CardList} from './Cardlist.js'
+import {Popup} from './Popup.js'
+
 
 
 /* Функции */
 
 function validate(element) {
 
-  const errorElement = document.querySelector(`#error-${element.id}`);
+  const errorElement = document.querySelector(`#error-${element.id}`)
   
   // вывод сообщения об ошибке
   if(!element.checkValidity()) {
@@ -102,7 +103,7 @@ function sendData(event, body, popup, callbak) {
 
   //при отправке данных меняем значение кнопки 
   renderLoading(true, button);
-switch (event.target.name) {
+  switch (event.target.name) {
   case 'newCard':
     api.addNewCard(body)
     .then(res => callbak(res))
@@ -115,6 +116,11 @@ switch (event.target.name) {
     break;
   case 'editInfo':
     api.setUserInfo(body)
+    .then(res => {
+      userInfoName.textContent          = res.name;
+      userInfoJob.textContent           = res.about;
+      userAvatar.style.backgroundImage  = `url(${res.avatar})`;
+    })
     .then(res => callbak(res))
     .catch(err => console.log(err))
     .finally(()=>{
@@ -149,18 +155,6 @@ function renderLoading(isLoading, button, innerText) {
 }
 
 /* Переменные */
-const myToken             = '05085b6d-94ca-4d8c-9b9c-a218a21e8eeb';
-const urlUsers            = '/users';
-const urlMe               =  urlUsers + '/me';
-const urlCards            = '/cards';
-
-const api = new Api({
-  baseUrl: 'https://praktikum.tk/cohort1',
-  headers: {
-    authorization: myToken,
-    'Content-Type': 'application/json'
-  }
-});
 
 export const cardList = new CardList( document.querySelector('.places-list'), /*[],*/ document.getElementById('img'));
 
@@ -183,8 +177,15 @@ export const userInfoName        = document.querySelector('.user-info__name');
 export const userInfoJob         = document.querySelector('.user-info__job');
 export const userAvatar          = document.querySelector('.user-info__photo');
 
-
-api.getInitialCards();
+//Инициализация карточек
+api.getInitialCards()
+// .then(res => res.filter(item => item.owner._id == this.user._id)) // Oтображениe всех карточек
+.then(res => {
+  res.forEach(item => {
+    cardList.addCard(item.name, item.link, item.owner._id);
+  });
+})
+.catch(err => console.log(err));
 /* Слушатели */
 
 buttonUserInfo.addEventListener('click', ()=>{
