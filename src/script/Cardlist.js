@@ -1,6 +1,6 @@
-import {Card} from './Card.js';
-import {Popup} from './Popup.js';
-import {indexApi as api} from './index.js'
+import {Card} from './Card.js'
+import {Popup} from './Popup.js'
+
 export class CardList {
     constructor(container, /*listCards,*/ popup) {
       this.container  = container;
@@ -11,8 +11,8 @@ export class CardList {
       // this.render();
     }
   
-    addCard(title, url, idCard) {
-      const { cardElement } = new Card(title, url, idCard);
+    addCard(title, url, idCard, user_id) {
+      const { cardElement } = new Card(title, url, idCard, user_id);
       this.container.appendChild(cardElement);
     }
   

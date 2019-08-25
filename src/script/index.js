@@ -88,7 +88,7 @@ function handleValidate(event) {
 }
 
 function sendNewCard(res) {
-  cardList.addCard(res.name, res.link);
+  cardList.addCard(res.name, res.link, res._id);
 }
 
 function changeEditInfo(res) {
