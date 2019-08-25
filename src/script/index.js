@@ -9,7 +9,6 @@ import {Popup} from './Popup.js'
 
 //Инициализация карточек
 api.getInitialCards()
-// .then(res => res.filter(item => item.owner._id == this.user._id)) // Oтображениe карточек пользователя
 .then(res => {
   res.forEach(item => {
     cardList.addCard(item.name, item.link, item.owner._id);
