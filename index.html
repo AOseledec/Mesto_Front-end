@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="style.8f5a23e9b606bb98cfe1.css?38562afbafb033ae2b06">
+</head>
+
+<body>
+
+  <main class="root">
+
+    <header class="header root__section">
+      <img src="./images/logo.svg" alt="mesto logo" class="logo">
+    </header>
+
+    <!--Карточка автора-->
+    <section class="profile root__section">
+      <div class="user-info">
+        <div class="user-info__photo"></div>
+        <div class="user-info__data">
+          <h1 class="user-info__name"></h1>
+          <p class="user-info__job"></p>
+          <button class="button user-info__edit-button" id='editInfoButton'>Edit</button>
+        </div>
+        <button class="button user-info__button" id='addNewCard'>+</button>
+      </div>
+    </section>
+
+    <!-- Контейнер для карточек -->
+    <section class="places-list root__section">
+
+    </section>
+    
+    <section class="popup" id="card">
+      <!-- Меню добавления карточек -->
+      <div class="popup__content" >
+        <img src="./images/close.svg" alt="" class="popup__close" id='closeCard'>
+        <h3 class="popup__title">Новое место</h3>
+        <form novalidate class="popup__form" name="newCard">
+          <input id='titleId' type="text" required minlength="2" maxlength="30" name="inputFirst" class="popup__input" placeholder="Название">
+          <span class = 'popup__span-error' id="error-titleId"></span>
+          <input id='urlId' type="url" required  class="popup__input" name="inputSecond" placeholder="Ссылка на картинку">
+          <span class = 'popup__span-error' id="error-urlId"></span>
+          <button id='submitCard' name='button' type class="button popup__button" disabled>+</button>
+        </form>
+      </div>
+    </section>
+    
+    <section class="popup" id="edit">
+      <!-- Меню правки карточки автора -->
+      <div class="popup__content">
+        <img src="./images/close.svg" alt="" class="popup__close" id='closeEdit'>
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form novalidate class="popup__form" name="editInfo">
+          <input id='nameId' type="text" required minlength="2" maxlength="30" name="inputFirst" class="popup__input" placeholder="Имя">
+          <span class = 'popup__span-error' id="error-nameId"></span>
+          <input id='aboutId' type="text" required  minlength="2" maxlength="30" name="inputSecond" class="popup__input" placeholder="О себе">
+          <span class = 'popup__span-error' id="error-aboutId"></span>
+          <button id='submitEdit'type name='button' class="button popup__button" disabled>Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup" id="avatar">
+      <!-- Меню правки фото автора -->
+      <div class="popup__content">
+        <img src="./images/close.svg" alt="" class="popup__close" id='closeAvatar'>
+        <h3 class="popup__title">Редактировать аватар</h3>
+        <form novalidate class="popup__form" name="avatar">
+          <input id='nameId' type="url" required name="inputFirst" class="popup__input" placeholder="Сылка на аватар">
+          <span class = 'popup__span-error' id="error-nameId"></span>
+          <button id='submitAvatar'type name='button' class="button popup__button" disabled>Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup" id="img">
+      <!-- Popup img -->
+      <div class="popup__content popup__img">
+          <img src="./images/close.svg" alt="" class="popup__close">
+      </div>
+    </section>
+
+  </main>
+
+  <script src="main.013a9ec66c8bf95d081f.js?38562afbafb033ae2b06"></script>
+</body>
+</html>
