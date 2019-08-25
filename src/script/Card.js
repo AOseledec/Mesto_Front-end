@@ -1,10 +1,12 @@
-import {indexApi as api} from './index.js'
+import {api} from './Backend.js'
 
 export class Card {
 
     constructor(title, url, idCard) {
-      this.cardElement = this.create(title,url, idCard);
       this.idCard = idCard;
+      this.title = title;
+      this.url = url;
+      this.cardElement = this.create();
     }
     
     remove(event) {
@@ -15,7 +17,7 @@ export class Card {
       event.target.classList.toggle('place-card__like-icon_liked');
     }
   
-    create(title, url, idCard) {
+    create() {
   
       const cardContainer = document.createElement('div');
       const cardImageContainer = document.createElement('div');
@@ -26,14 +28,14 @@ export class Card {
   
       cardContainer.classList.add('place-card');
       cardImageContainer.classList.add('place-card__image');
-      cardImageContainer.style.backgroundImage = `url(${url})`;
+      cardImageContainer.style.backgroundImage = `url(${this.url})`;
       cardButtonDelete.classList.add('place-card__delete-icon');
       cardDescriptionContainer.classList.add('place-card__description');
       cardTitleElement.classList.add('place-card__name');
       cardTitleElement.textContent = this.title;
       cardButtonLike.classList.add('place-card__like-icon');
   
-      if(idCard === api.user._id){
+      if(this.idCard === api.user._id){
         cardButtonDelete.classList.add('place-card__delete-icon_display-block');
       }
   

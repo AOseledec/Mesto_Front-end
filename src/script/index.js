@@ -7,6 +7,15 @@ import {CardList} from './Cardlist.js'
 import {Popup} from './Popup.js'
 
 
+//Инициализация карточек
+api.getInitialCards()
+// .then(res => res.filter(item => item.owner._id == this.user._id)) // Oтображениe карточек пользователя
+.then(res => {
+  res.forEach(item => {
+    cardList.addCard(item.name, item.link, item.owner._id);
+  });
+})
+.catch(err => console.log(err));
 
 /* Функции */
 
@@ -147,11 +156,7 @@ function sendData(event, body, popup, callbak) {
 }
 
 function renderLoading(isLoading, button, innerText) {
-  if(isLoading){
-    button.innerText = 'Загрузка...';  
-  } else {
-    button.innerText = innerText;  
-  }
+  button.innerText = isLoading ? 'Загрузка...' : 'innerText' 
 }
 
 /* Переменные */
@@ -169,26 +174,13 @@ const formAddNewCard      = popupAddNewCard.form;
 const formEditInfo        = popupEditInfo.form;
 const formAvatar          = popupAvatar.form;
 
-const buttonSubmitNewCard = formAddNewCard.elements.button;
-const buttonSubmitEditInfo= formEditInfo.elements.button;
-const buttonSubmitAvatar  = formAvatar.elements.button;
+const userInfoName        = document.querySelector('.user-info__name');
+const userInfoJob         = document.querySelector('.user-info__job');
+const userAvatar          = document.querySelector('.user-info__photo');
 
-export const userInfoName        = document.querySelector('.user-info__name');
-export const userInfoJob         = document.querySelector('.user-info__job');
-export const userAvatar          = document.querySelector('.user-info__photo');
-
-//Инициализация карточек
-api.getInitialCards()
-// .then(res => res.filter(item => item.owner._id == this.user._id)) // Oтображениe всех карточек
-.then(res => {
-  res.forEach(item => {
-    cardList.addCard(item.name, item.link, item.owner._id);
-  });
-})
-.catch(err => console.log(err));
 /* Слушатели */
 
-buttonUserInfo.addEventListener('click', ()=>{
+buttonUserInfo.addEventListener('click', () => {
   popupEditInfo.open();
   formEditInfo.elements.inputFirst.value = userInfoName.textContent;
   formEditInfo.elements.inputSecond.value = userInfoJob.textContent;
@@ -217,5 +209,3 @@ formEditInfo.elements.inputSecond.addEventListener('input', handleValidate);
 formAddNewCard.elements.inputSecond.addEventListener('input', handleValidate);
 formEditInfo.elements.inputFirst.addEventListener('input', handleValidate);
 formAvatar.elements.inputFirst.addEventListener('input', handleValidate);
-
-export {api as indexApi};
