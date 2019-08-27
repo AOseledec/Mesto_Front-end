@@ -1,5 +1,3 @@
-import {api} from './Backend.js'
-
 export class Card {
 
     constructor(title, url, idCard, user_id) {
@@ -36,6 +34,7 @@ export class Card {
       cardTitleElement.textContent = this.title
       cardButtonLike.classList.add('place-card__like-icon')
   
+      console.log(this.idCard === this.user_id)
       if(this.idCard === this.user_id){
         cardButtonDelete.classList.add('place-card__delete-icon_display-block')
       }

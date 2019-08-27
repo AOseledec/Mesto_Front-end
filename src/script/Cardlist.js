@@ -11,7 +11,7 @@ export class CardList {
       // this.render();
     }
   
-    addCard(title, url, idCard, user_id) {
+    addCard(title, url,user_id, idCard) {
       const { cardElement } = new Card(title, url, idCard, user_id);
       this.container.appendChild(cardElement);
     }

@@ -11,7 +11,7 @@ import {Popup} from './Popup.js'
 api.getInitialCards()
 .then(res => {
   res.forEach(item => {
-    cardList.addCard(item.name, item.link, item.owner._id);
+    cardList.addCard(item.name, item.link, item.owner._id, item._id);
   });
 })
 .catch(err => console.log(err));
@@ -111,51 +111,52 @@ function sendData(event, body, popup, callbak) {
 
   //при отправке данных меняем значение кнопки 
   renderLoading(true, button);
-  switch (event.target.name) {
-  case 'newCard':
-    api.addNewCard(body)
-    .then(res => callbak(res))
-    .catch(err => console.log(err))
-    .finally(()=>{
-      disabledButton(button);
-      renderLoading(false, button, '+');
-      popup.close();
-    });
-    break;
-  case 'editInfo':
-    api.setUserInfo(body)
-    .then(res => {
-      userInfoName.textContent          = res.name;
-      userInfoJob.textContent           = res.about;
-      userAvatar.style.backgroundImage  = `url(${res.avatar})`;
-    })
-    .then(res => callbak(res))
-    .catch(err => console.log(err))
-    .finally(()=>{
-      disabledButton(button);
-      renderLoading(false, button, 'Сохранить');
-      popup.close();
-    });
-    break;
-  case 'avatar':
-    api.setUserAvatar(body)
-    .then(res => callbak(res))
-    .catch(err => console.log(err))
-    .finally(()=>{
-      disabledButton(button);
-      renderLoading(false, button, 'Сохранить');
-      popup.close();
-    });
-    break;
 
-  default:
-    console.log('Что-то пошло не так');
-    break;
-}
+  switch (event.target.name) {
+    case 'newCard':
+      api.addNewCard(body)
+      .then(res => callbak(res))
+      .catch(err => console.log(err))
+      .finally(() => {
+        disabledButton(button);
+        renderLoading(false, button, '+');
+        popup.close();
+      });
+      break;
+    case 'editInfo':
+      api.setUserInfo(body)
+      .then(res => {
+        userInfoName.textContent          = res.name;
+        userInfoJob.textContent           = res.about;
+        userAvatar.style.backgroundImage  = `url(${res.avatar})`;
+      })
+      .then(res => callbak(res))
+      .catch(err => console.log(err))
+      .finally(() => {
+        disabledButton(button);
+        renderLoading(false, button, 'Сохранить');
+        popup.close();
+      });
+      break;
+    case 'avatar':
+      api.setUserAvatar(body)
+      .then(res => callbak(res))
+      .catch(err => console.log(err))
+      .finally(() => {
+        disabledButton(button);
+        renderLoading(false, button, 'Сохранить');
+        popup.close();
+      });
+      break;
+
+    default:
+      console.log('Что-то пошло не так');
+      break;
+  }
 }
 
 function renderLoading(isLoading, button, innerText) {
-  button.innerText = isLoading ? 'Загрузка...' : 'innerText' 
+  button.innerText = isLoading ? 'Загрузка...' : innerText
 }
 
 /* Переменные */
