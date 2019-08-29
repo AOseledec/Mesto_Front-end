@@ -1,9 +1,15 @@
 export class Api {
     constructor(options) {
       // тело конструктора
-      this.url      = options.baseUrl;
-      this.headers  = options.headers;
-      this.user     = this.getUserInfo(); 
+      this.url      = options.baseUrl
+      this.headers  = options.headers
+      
+      const user    = {}
+      this.getUserInfo().then(res => {
+        for (let key in res) {
+          user[key] = res[key]
+        }
+      })
     }
   
     // Формируем запрос на сервер

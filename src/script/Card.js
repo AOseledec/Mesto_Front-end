@@ -1,6 +1,7 @@
 export class Card {
 
-    constructor(title, url, idCard, user_id) {
+    constructor(title, url, idCard, user_id, owner_id) {
+      this.owner_id = owner_id
       this.user_id = user_id
       this.idCard = idCard
       this.title = title
@@ -34,8 +35,8 @@ export class Card {
       cardTitleElement.textContent = this.title
       cardButtonLike.classList.add('place-card__like-icon')
   
-      console.log(this.idCard === this.user_id)
-      if(this.idCard === this.user_id){
+      console.log(this.owner_id === this.user_id)
+      if(this.idCard == this.user_id){
         cardButtonDelete.classList.add('place-card__delete-icon_display-block')
       }
   
@@ -48,6 +49,12 @@ export class Card {
   
       cardButtonLike.addEventListener('click', this.like)
       cardButtonDelete.addEventListener('click', (event) => {this.remove(event)})
+      cardContainer.addEventListener('mouseover', () => { 
+        
+        console.log(`owner_id: ${this.owner_id}`) 
+        console.log(`id_user: ${this.user_id}`) 
+        // console.log(this.user_id) 
+      })
       return cardContainer
     }
   

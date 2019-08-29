@@ -6,12 +6,15 @@ import {api} from './Backend.js'
 import {CardList} from './Cardlist.js'
 import {Popup} from './Popup.js'
 
+// const user = {_id : ''}
+// api.getUserInfo().then(res => user._id = res._id)
+// console.log(api.user._id);
 
 //Инициализация карточек
 api.getInitialCards()
 .then(res => {
   res.forEach(item => {
-    cardList.addCard(item.name, item.link, item.owner._id, item._id);
+    cardList.addCard(item.name, item.link, item.owner._id, item._id,);
   });
 })
 .catch(err => console.log(err));
@@ -87,7 +90,7 @@ function handleValidate(event) {
 }
 
 function sendNewCard(res) {
-  cardList.addCard(res.name, res.link, res._id);
+  cardList.addCard(res.name, res.link, res._id, res.owner._id);
 }
 
 function changeEditInfo(res) {
@@ -99,23 +102,23 @@ function changeAvatar(res) {
   userAvatar.style.backgroundImage = `url(${res.avatar})`;
 }
 
-function sendData(event, body, popup, callbak) {
+function sendData(event, body, popup, callback) {
   /** описание функции
    * event  - собыите отправки формы
    * body   - тело запроса на сервер
    * popup  - форма отправки 
-   * callbak- действия при положительном ответе сервера связан с response
+   * callback- действия при положительном ответе сервера связан с response
    */
   event.preventDefault();
-  const button  = event.target.button; 
-
+  const { button }  = event.target;
+  
   //при отправке данных меняем значение кнопки 
   renderLoading(true, button);
 
   switch (event.target.name) {
     case 'newCard':
       api.addNewCard(body)
-      .then(res => callbak(res))
+      .then(res => callback(res))
       .catch(err => console.log(err))
       .finally(() => {
         disabledButton(button);
@@ -130,7 +133,7 @@ function sendData(event, body, popup, callbak) {
         userInfoJob.textContent           = res.about;
         userAvatar.style.backgroundImage  = `url(${res.avatar})`;
       })
-      .then(res => callbak(res))
+      .then(res => callback(res))
       .catch(err => console.log(err))
       .finally(() => {
         disabledButton(button);
@@ -140,7 +143,7 @@ function sendData(event, body, popup, callbak) {
       break;
     case 'avatar':
       api.setUserAvatar(body)
-      .then(res => callbak(res))
+      .then(res => callback(res))
       .catch(err => console.log(err))
       .finally(() => {
         disabledButton(button);
@@ -161,7 +164,7 @@ function renderLoading(isLoading, button, innerText) {
 
 /* Переменные */
 
-export const cardList = new CardList( document.querySelector('.places-list'), /*[],*/ document.getElementById('img'));
+const cardList = new CardList( document.querySelector('.places-list'), /*[],*/ document.getElementById('img'));
 
 const buttonUserInfo      = document.getElementById('editInfoButton');
 const buttonAddNewCard    = document.getElementById('addNewCard');
