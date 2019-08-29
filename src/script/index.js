@@ -6,18 +6,22 @@ import {api} from './Backend.js'
 import {CardList} from './Cardlist.js'
 import {Popup} from './Popup.js'
 
-// const user = {_id : ''}
-// api.getUserInfo().then(res => user._id = res._id)
-// console.log(api.user._id);
 
 //Инициализация карточек
-api.getInitialCards()
-.then(res => {
-  res.forEach(item => {
-    cardList.addCard(item.name, item.link, item.owner._id, item._id,);
-  });
+const user = {}
+api.getUserInfo().then(res => {
+  for (let key in res) {
+    user[key] = res[key]
+  }
+}).then(() => {
+  api.getInitialCards()
+  .then(res => {
+    res.forEach(item => {
+      cardList.addCard(item.name, item.link, item.owner._id, item._id, user._id);
+    });
+  })
+  .catch(err => console.log(err));
 })
-.catch(err => console.log(err));
 
 /* Функции */
 

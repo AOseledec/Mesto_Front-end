@@ -3,17 +3,11 @@ export class Api {
       // тело конструктора
       this.url      = options.baseUrl
       this.headers  = options.headers
-      
-      const user    = {}
-      this.getUserInfo().then(res => {
-        for (let key in res) {
-          user[key] = res[key]
-        }
-      })
-      // this.getUserInfo().then(res => {
-      //   Object.keys(res).forEach(item => user[item] = res[item])
-      // })
+
     }
+
+
+
     // Формируем запрос на сервер
     sendRequest(url, method, body) {
       return fetch(`${this.url}${url}`, {
@@ -29,7 +23,8 @@ export class Api {
       })
       .catch(err => Promise.reject(err));
     }
-  
+
+
     // загружаем с сервера начальный набор карточек
     getInitialCards() {
       return this.sendRequest('/cards','get');
@@ -39,7 +34,20 @@ export class Api {
     getUserInfo() {
       return this.sendRequest('/users/me', 'get');
     }
-  
+
+    userInfo() {
+      this.getUserInfo()
+      .then((res) => {
+        const obj = {}
+        for (let key in res) {
+          obj[key] = res[key]
+        }
+      })
+
+      // this..getUserInfo().then(res => {
+      //   Object.keys(res).forEach(key => user[key] = res[key])
+      // })
+    }
     // добавляем карточку
     addNewCard(body) {
       return this.sendRequest('/cards', 'POST', body);  
@@ -51,7 +59,7 @@ export class Api {
     }
   
     setUserAvatar(body) {
-      return this.sendRequest('/users/me/avatar','PATCH', body/*{avatar: ''}*/);
+      return this.sendRequest('/users/me/avatar','PATCH', body);
     }
   
     deleteCard() {

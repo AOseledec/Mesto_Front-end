@@ -1,20 +1,12 @@
 export class Card {
 
-    constructor(title, url, idCard, user_id, owner_id) {
+    constructor(title, url, owner_id, card_id, user_id) {
       this.owner_id = owner_id
       this.user_id = user_id
-      this.idCard = idCard
+      this.card_id = card_id
       this.title = title
       this.url = url
       this.cardElement = this.create()
-    }
-    
-    remove(event) {
-      event.target.closest('.place-card').parentElement.removeChild(this.cardElement)
-    }
-  
-    like(event) {
-      event.target.classList.toggle('place-card__like-icon_liked')
     }
   
     create() {
@@ -35,8 +27,7 @@ export class Card {
       cardTitleElement.textContent = this.title
       cardButtonLike.classList.add('place-card__like-icon')
   
-      console.log(this.owner_id === this.user_id)
-      if(this.idCard == this.user_id){
+      if(this.owner_id == this.user_id){
         cardButtonDelete.classList.add('place-card__delete-icon_display-block')
       }
   
@@ -47,15 +38,18 @@ export class Card {
       cardContainer.appendChild(cardDescriptionContainer)
   
   
-      cardButtonLike.addEventListener('click', this.like)
-      cardButtonDelete.addEventListener('click', (event) => {this.remove(event)})
-      cardContainer.addEventListener('mouseover', () => { 
-        
-        console.log(`owner_id: ${this.owner_id}`) 
-        console.log(`id_user: ${this.user_id}`) 
-        // console.log(this.user_id) 
-      })
+      cardButtonLike.addEventListener('click',  this.like)
+      cardButtonDelete.addEventListener('click',  event => this.remove(event))
+
       return cardContainer
+    }
+
+    remove(event) {
+      event.target.closest('.place-card').parentElement.removeChild(this.cardElement)
+    }
+  
+    like(event) {
+      event.target.classList.toggle('place-card__like-icon_liked')
     }
   
 }
