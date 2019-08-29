@@ -10,8 +10,10 @@ export class Api {
           user[key] = res[key]
         }
       })
+      // this.getUserInfo().then(res => {
+      //   Object.keys(res).forEach(item => user[item] = res[item])
+      // })
     }
-  
     // Формируем запрос на сервер
     sendRequest(url, method, body) {
       return fetch(`${this.url}${url}`, {
