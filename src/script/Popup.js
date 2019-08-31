@@ -6,7 +6,7 @@ export class Popup {
       this.buttonClose        = this.popup.querySelector('.popup__close')
       this.img                = document.createElement('img')
   
-      if(buttonOpenPopup){
+      if(!!buttonOpenPopup){
         this.buttonOpenPopup  = buttonOpenPopup
         this.buttonOpenPopup.addEventListener('click', () => {this.open()})
       }    
