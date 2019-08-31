@@ -1,3 +1,18 @@
+import {api} from './Backend'
+import {
+    cardList,
+    buttonUserInfo,
+    buttonAddNewCard,
+    popupAddNewCard,
+    popupEditInfo,
+    popupAvatar,
+    formAddNewCard,
+    formEditInfo,
+    formAvatar,
+    userInfoName,
+    userInfoJob,
+    userAvatar
+  } from './constants'
 /* Функции */
 
 function validate(element) {
@@ -71,12 +86,7 @@ function validate(element) {
   function sendNewCard(res) {
     cardList.addCard(res.name, res.link, res._id, res.owner._id);
   }
-  
-  function changeEditInfo(res) {
-    userInfoName.textContent  = res.name;
-    userInfoJob.textContent   = res.about;
-  }
-  
+    
   function changeAvatar(res) {
     userAvatar.style.backgroundImage = `url(${res.avatar})`;
   }
@@ -111,6 +121,7 @@ function validate(element) {
           userInfoName.textContent          = res.name;
           userInfoJob.textContent           = res.about;
           userAvatar.style.backgroundImage  = `url(${res.avatar})`;
+          return res
         })
         .then(res => callback(res))
         .catch(err => console.log(err))
@@ -151,7 +162,6 @@ function validate(element) {
     switchButton,
     handleValidate,
     sendNewCard,
-    changeEditInfo,
     changeAvatar,
     sendData,
     renderLoading

@@ -5,7 +5,6 @@ import {api} from './Backend.js'
 import {
   handleValidate,
   sendNewCard,
-  changeEditInfo,
   changeAvatar,
   sendData
 } from './utils'
@@ -32,6 +31,9 @@ api.getUserInfo().then(res => {
   for (let key in res) {
     user[key] = res[key]
   }
+  userInfoName.textContent = res.name;
+  userInfoJob.textContent = res.about;
+  userAvatar.style.backgroundImage  = `url(${res.avatar})`;
 }).then(() => {
   api.getInitialCards()
   .then(res => {
@@ -42,6 +44,14 @@ api.getUserInfo().then(res => {
   .catch(err => console.log(err));
 })
 
+
+function changeEditInfo(res) {
+  console.log(res)
+  console.log(res.name)
+
+  userInfoName.textContent  = res.name;
+  userInfoJob.textContent   = res.about;
+}
 /* Слушатели */
 
 buttonUserInfo.addEventListener('click', () => {
