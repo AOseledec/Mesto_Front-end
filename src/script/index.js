@@ -28,7 +28,9 @@ const user = {}
 
 api.getUserInfo().then(res => {
   for (let key in res) {
-    user[key] = res[key]
+    if (res.hasOwnProperty(key)) {
+      user[key] = res[key]
+    } else console.log(`Error: wrong type key: ${key}`)
   }
   userInfoName.textContent = res.name 
   userInfoJob.textContent = res.about 

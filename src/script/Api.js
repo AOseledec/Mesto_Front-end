@@ -1,7 +1,7 @@
 export class Api {
     constructor(options) {
       // тело конструктора
-      this.url      = options.baseUrl
+      this.url      = options.URL_BASE
       this.headers  = options.headers
 
     }
