@@ -16,7 +16,7 @@ export class Card {
       this.likeButton = this.cardElement.querySelector('.place-card__like-icon')
 
       this.likeButton.addEventListener('click', this.onLike)
-      if(!!this.cardElement.querySelector('.place-card__delete-icon')) {
+      if(!!this.deleteButton) {
         this.deleteButton.addEventListener('click', this.onDelete)
       }
     }
@@ -55,14 +55,14 @@ export class Card {
     }
 
     removeCard() {
-      // this.cardElement.querySelector('.place-card__delete-icon').removeEventListener('click', this.onDelete)
-      // this.cardElement.querySelector('.place-card__like-icon').removeEventListener('click', this.onLike)
+      this.deleteButton.removeEventListener('click', this.onDelete)
+      this.likeButton.removeEventListener('click', this.onLike)
 
       this.cardElement.remove()
     }
   
     like() {
-      this.cardElement.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked')
+      this.likeButton.classList.toggle('place-card__like-icon_liked')
     }
   
 }
