@@ -62,9 +62,9 @@ export class Api {
       return this.sendRequest('/users/me/avatar','PATCH', body);
     }
   
-    deleteCard() {
+    // deleteCard() {
   
-    }
+    // }
   
     setLikeCard() {
       return this.sendRequest('/cards/like/cardId', 'PUT', body);

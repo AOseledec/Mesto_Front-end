@@ -21,30 +21,31 @@ import {
   userInfoJob,
   userAvatar
 } from './constants'
+import { Promise } from "q";
 
 
 //Инициализация карточек
 const user = {}
 
-api.getUserInfo().then(res => {
-  for (let key in res) {
-    if (res.hasOwnProperty(key)) {
-      user[key] = res[key]
+Promise.all([
+  api.getUserInfo(), 
+  api.getInitialCards()
+]).then(([info, cards]) => {
+  
+  for (let key in info) {
+    if (info.hasOwnProperty(key)) {
+      user[key] = info[key]
     } else console.log(`Error: wrong type key: ${key}`)
   }
-  userInfoName.textContent = res.name 
-  userInfoJob.textContent = res.about 
-  userAvatar.style.backgroundImage  = `url(${res.avatar})` 
-}).then(() => {
-  api.getInitialCards()
-  .then(res => {
-    res.forEach(item => {
-      cardList.addCard(item.name, item.link, item.owner._id, item._id, user._id) 
-    }) 
-  })
-  .catch(err => console.log(err)) 
-})
+  userInfoName.textContent = info.name 
+  userInfoJob.textContent = info.about 
+  userAvatar.style.backgroundImage  = `url(${info.avatar})`
 
+    cards.forEach(item => {
+      cardList.addCard(item.name, item.link, item.owner._id, item._id, user._id) 
+    })
+})
+.catch(err => console.log(err))
 
 function changeEditInfo(res) {
   userInfoName.textContent  = res.name 

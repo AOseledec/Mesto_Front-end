@@ -6,49 +6,63 @@ export class Card {
       this.card_id = card_id
       this.title = title
       this.url = url
+      
       this.cardElement = this.create()
+
+      this.onLike = this.like.bind(this)
+      this.onDelete = this.removeCard.bind(this)
+
+      this.deleteButton = this.cardElement.querySelector('.place-card__delete-icon')
+      this.likeButton = this.cardElement.querySelector('.place-card__like-icon')
+
+      this.likeButton.addEventListener('click', this.onLike)
+      if(!!this.cardElement.querySelector('.place-card__delete-icon')) {
+        this.deleteButton.addEventListener('click', this.onDelete)
+      }
     }
   
     create() {
   
       const cardContainer = document.createElement('div')
       const cardImageContainer = document.createElement('div')
-      const cardButtonDelete = document.createElement('button')
       const cardDescriptionContainer = document.createElement('div')
       const cardTitleElement = document.createElement('h3')
       const cardButtonLike = document.createElement('button')
-  
+      
       cardContainer.classList.add('place-card')
       cardImageContainer.classList.add('place-card__image')
       cardImageContainer.style.backgroundImage = `url(${this.url})`
-      cardButtonDelete.classList.add('place-card__delete-icon')
       cardDescriptionContainer.classList.add('place-card__description')
       cardTitleElement.classList.add('place-card__name')
       cardTitleElement.textContent = this.title
       cardButtonLike.classList.add('place-card__like-icon')
-      cardButtonDelete.classList.add('place-card__delete-icon_display-block')
-  
+      
+
+
       if(this.owner_id == this.user_id){
+        const cardButtonDelete = document.createElement('button')
+        cardButtonDelete.classList.add('place-card__delete-icon')
+        cardButtonDelete.classList.add('place-card__delete-icon_display-block')
+
         cardImageContainer.appendChild(cardButtonDelete)
       }
       cardDescriptionContainer.appendChild(cardTitleElement)
       cardDescriptionContainer.appendChild(cardButtonLike)
       cardContainer.appendChild(cardImageContainer)
       cardContainer.appendChild(cardDescriptionContainer)
-  
-  
-      cardButtonLike.addEventListener('click',  this.like)
-      cardButtonDelete.addEventListener('click', this.remove)
 
       return cardContainer
     }
 
-    remove(event) {
-      event.target.closest('.place-card').remove()
+    removeCard() {
+      // this.cardElement.querySelector('.place-card__delete-icon').removeEventListener('click', this.onDelete)
+      // this.cardElement.querySelector('.place-card__like-icon').removeEventListener('click', this.onLike)
+
+      this.cardElement.remove()
     }
   
-    like(event) {
-      event.target.classList.toggle('place-card__like-icon_liked')
+    like() {
+      this.cardElement.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked')
     }
   
 }
