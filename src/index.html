@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
 
 <body>
@@ -71,8 +71,8 @@
         <img src="./images/close.svg" alt="" class="popup__close" id='closeAvatar'>
         <h3 class="popup__title">Редактировать аватар</h3>
         <form novalidate class="popup__form" name="avatar">
-          <input id='nameId' type="url" required name="inputFirst" class="popup__input" placeholder="Сылка на аватар">
-          <span class = 'popup__span-error' id="error-nameId"></span>
+          <input id='avatarId' type="url" required name="inputFirst" class="popup__input" placeholder="Сылка на аватар">
+          <span class = 'popup__span-error' id="error-avatarId"></span>
           <button id='submitAvatar'type name='button' class="button popup__button" disabled>Сохранить</button>
         </form>
       </div>
@@ -87,6 +87,6 @@
 
   </main>
 
-  <script src="script/script.js"></script>
+  <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 </html>
