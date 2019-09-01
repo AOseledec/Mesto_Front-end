@@ -26,12 +26,11 @@ export class Card {
       cardTitleElement.classList.add('place-card__name')
       cardTitleElement.textContent = this.title
       cardButtonLike.classList.add('place-card__like-icon')
+      cardButtonDelete.classList.add('place-card__delete-icon_display-block')
   
       if(this.owner_id == this.user_id){
-        cardButtonDelete.classList.add('place-card__delete-icon_display-block')
+        cardImageContainer.appendChild(cardButtonDelete)
       }
-  
-      cardImageContainer.appendChild(cardButtonDelete)
       cardDescriptionContainer.appendChild(cardTitleElement)
       cardDescriptionContainer.appendChild(cardButtonLike)
       cardContainer.appendChild(cardImageContainer)
@@ -39,13 +38,13 @@ export class Card {
   
   
       cardButtonLike.addEventListener('click',  this.like)
-      cardButtonDelete.addEventListener('click',  event => this.remove(event))
+      cardButtonDelete.addEventListener('click', this.remove)
 
       return cardContainer
     }
 
     remove(event) {
-      event.target.closest('.place-card').parentElement.removeChild(this.cardElement)
+      event.target.closest('.place-card').remove()
     }
   
     like(event) {
