@@ -1,5 +1,5 @@
 # Mesto_Front-end
-## [Ссылка на gh-pages проекта](https://aoseledec.github.io/st11/)
+## [gh-page](https://aoseledec.github.io/mesto_front-end/)
 
 Код разбит на модули, подключен Webpack & Babel
 
