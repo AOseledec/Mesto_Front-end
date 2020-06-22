@@ -57,7 +57,6 @@ export class Card {
     removeCard() {
       this.deleteButton.removeEventListener('click', this.onDelete)
       this.likeButton.removeEventListener('click', this.onLike)
-
       this.cardElement.remove()
     }
   

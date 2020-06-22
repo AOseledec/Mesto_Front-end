@@ -1,4 +1,4 @@
-import {Api} from './Api.js'
+import { Api } from './Api.js'
 
 const url = {
     URL_BASE: 'https://praktikum.tk/cohort1',
@@ -7,6 +7,7 @@ const url = {
     URL_ME: '/users/me',
     URL_CARDS: '/cards',
 }
+
 export const api = new Api({
   URL_BASE: url.URL_BASE,
   headers: {
